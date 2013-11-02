@@ -2,7 +2,7 @@ class @IssueView extends Backbone.View
   initialize: () ->
     this.model.on('change', this.updateIssue, this)
   tagName : 'div'
-  className : "issue span3"
+  className : "issue col-lg-3"
   template: _.template(
     $('#issue-template').html()
   )

@@ -7,7 +7,7 @@
 <script type="text/template" id="search-template">
 <form>
 <input type="text" class="input" style="margin-top: 10px;" />
-<input type="submit" value="search" class="submit btn" />
+<input type="submit" value="search" class="submit btn btn-default" />
 </form>
 <div class="results"></div>
 </script>
@@ -20,7 +20,7 @@
 <a href="#" class="btn btn-warning">DDT</a>
 </div>
 <div class="edit"> 
-<a href="#" class="btn">Edit</a>
+<a href="#" class="btn btn-default">Edit</a>
 </div>
 </div>
 </div>
@@ -41,7 +41,7 @@
 <a class="card btn btn-primary" href="#">S</a>
 <a class="ddt btn btn-warning" href="#">D</a>
 <a class="cls btn btn-danger" href="#">C</a>
-<a class="edit btn" href="#">E</a>
+<a class="edit btn btn-default" href="#">E</a>
 </div>
 </div>
 <div class="body">${issue.body}</div>
@@ -77,22 +77,29 @@
 <script src="/js/timecard-backbone.js"></script>
 </head>
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container-fluid">
-      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+
+
+<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="brand" href="/">Timecard</a>
-      <div class="nav-collapse collapse"></div>
+      <a class="navbar-brand" href="/">Timecard</a>
     </div>
-  </div>
-</div>
-<div class="container-fluid">
-  <div class="row-fluid">
-    <div class="span3" style="margin-top:80px;">
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="https://ruffnote.com/timecard/timecard" target="_blank">README(Ruffnote)</a></li>
+      </ul>
+    </div><!-- /.nav-collapse -->
+  </div><!-- /.container -->
+</div><!-- /.navbar -->
+
+<div class="container">
+  <div class="row row-offcanvas row-offcanvas-right">
+    <div class="col-xs-12 col-sm-3">   
       <div class="well sidebar-nav">
         <table id="work_logs" class="table">
         </table>
@@ -115,7 +122,7 @@
         </ul>
       </div>
     </div>
-    <div class="span9" id="wrapper"></div>
+    <div class="col-xs-12 col-sm-9 sidebar-offcanvas" id="wrapper" role="navigation"></div>
   </div>
   </div>
   <footer>
