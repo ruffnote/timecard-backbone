@@ -1,4 +1,6 @@
 init = () ->
+  $("head").append($($tag("title").html("Timecard")))
+  renderLayout()
   prepareShowProjects()
   prepareShowDdtIssues()
   prepareDoExport()
