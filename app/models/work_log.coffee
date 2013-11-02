@@ -1,11 +1,7 @@
 class @WorkLog extends JSRelModel
-  #for JSRelmodel start
   table_name: "work_logs"
-  thisclass:  (params) ->
-    return new WorkLog(params)
   collection: (params) ->
     return new WorkLogs(params)
-  #for JSRelmodel end
 
   last: () ->
     res = this.condition({

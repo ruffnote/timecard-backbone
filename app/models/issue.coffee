@@ -1,11 +1,7 @@
 class Issue extends JSRelModel
-  #for JSRelmodel start
   table_name: "issues"
-  thisclass:  (params) ->
-    return new Issue(params)
   collection: (params) ->
     return new Issues(params)
-  #for JSRelmodel end
 
   validate: (attrs) ->
     if _.isEmpty(attrs.title)

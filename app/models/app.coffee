@@ -17,7 +17,7 @@ class @JSRelModel extends Backbone.Model
   find : (id) ->
     data = db.one(this.table_name, {id: id})
     return unless data
-    return new this.thisclass(
+    return new @constructor(
       data
     )
   find_all : () ->
