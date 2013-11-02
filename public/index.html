@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Timecard by BackboneJS</title>
+<link href="/css/bootstrap.min.css"rel="stylesheet" type="text/css" />
+<link href="/css/bootstrap-responsive.min.css"rel="stylesheet" type="text/css" />
+<link href="/css/main.css"rel="stylesheet" type="text/css" />
+<script type="text/template" id="search-template">
+<form>
+<input type="text" class="input" style="margin-top: 10px;" />
+<input type="submit" value="search" class="submit btn" />
+</form>
+<div class="results"></div>
+</script>
+<script type="text/template" id="project-template">
+<div class="span12">
+<h1><%- name %></h1>
+<div class="issues"></div>
+<div class="input-append"> 
+<div class="ddt"> 
+<a href="#" class="btn btn-warning">DDT</a>
+</div>
+<div class="edit"> 
+<a href="#" class="btn">Edit</a>
+</div>
+</div>
+</div>
+</script>
+<script type="text/template" id="add_issue-template">
+<input type="text" class="input" />
+<input type="submit" value="add issue" class="btn" />
+</script>
+<script type="text/template" id="issue-template">
+<h2>
+<label>
+<%= title_with_url() %>
+</label>
+<span class="time"></span>
+</h2>
+<div class="btn-toolbar">
+<div class="btn-group issue_<%- id %>">
+<a class="card btn btn-primary" href="#">S</a>
+<a class="ddt btn btn-warning" href="#">D</a>
+<a class="cls btn btn-danger" href="#">C</a>
+<a class="edit btn" href="#">E</a>
+</div>
+</div>
+<div class="body">${issue.body}</div>
+</script>
+<script type="text/template" id="work_log-template">
+<td class="word_break">
+<%= wbr(issue.title, 9) %>
+</td>
+<td>
+<%= dispDate(work_log)  %>
+</td>
+<td>
+<span class="time">
+<%= dispTime(work_log)  %>
+</span>
+</td>
+<td>
+<div class="work_log_<%= work_log.id %> issue_<%= issue.id %>" style="padding:10px;">
+<a href="#" class="card btn btn-primary" data-issue-id="<%= issue.id %>">S</a>
+</div>
+</td>
+</script>
+<script src="/js/lib/underscore.js"></script>
+<script src="/js/lib/jquery.js"></script>
+<script src="/js/lib/jquery-ui.js"></script>
+<script src="/js/lib/twitter/bootstrap.js"></script>
+<script src="/js/lib/backbone.js"></script>
+<script src="/js/lib/SortedList.js"></script>
+<script src="/js/lib/jsrel.js"></script>
+<script src="/js/lib/jsdeferred.js"></script>
+<script src="/js/lib/jshint.js"></script>
+<script src="/js/db/schema.js"></script>
+<script src="/js/timecard-backbone.js"></script>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="brand" href="/">Timecard</a>
+      <div class="nav-collapse collapse"></div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span3" style="margin-top:80px;">
+      <div class="well sidebar-nav">
+        <table id="work_logs" class="table">
+        </table>
+      </div>
+      <div class="well sidebar-nav add_buttons"> 
+        <ul class="nav nav-list" id="new_project">
+          <li><button class="btn add_project" type="button">add project</button></li>
+          <li><button class="btn show_ddt_issues" type="button">show DDT issues</button></li>
+          <li><button class="btn show_projects" type="button">show all projects</button></li>
+          <li><button class="btn do_export" type="button">export to file</button>
+          </li>
+          <li>
+            <input id="import_file" type="file" name="file" value="" style="display:none;" />
+            <button class="btn do_import" type="button">import from file</button>
+          </li>
+          <!--
+          <li><button class="btn do_download" type="button">Download</button></li>
+          <li><button class="btn do_upload" type="button">Upload</button></li>
+          -->
+        </ul>
+      </div>
+    </div>
+    <div class="span9" id="wrapper"></div>
+  </div>
+  </div>
+  <footer>
+    <p>&copy; Timecard 2013</p>
+  </footer>
+</div>
+</body>
+</html>
