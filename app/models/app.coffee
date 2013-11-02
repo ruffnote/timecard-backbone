@@ -12,7 +12,17 @@ class @JSRelModel extends Backbone.Model
         p = db.ins(this.table_name, cond)
         this.set("id", p.id)
       return if params && params.nosync
-      #$.post("/#{this.table_name}.json", this.toJSON())
+      if @token
+        console.log "token", @token
+        $.ajax(
+          url: "#{AJAX_URL}/#{this.table_name}.json"
+          type: "POST"
+          beforeSend: (xhr)->
+            xhr.setRequestHeader('X-CSRF-Token', @token)
+          data: this.toJSON() 
+        )
+      else
+        console.log "no token"
 
   find : (id) ->
     data = db.one(this.table_name, {id: id})

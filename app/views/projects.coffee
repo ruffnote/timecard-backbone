@@ -10,8 +10,8 @@ class @ProjectView extends Backbone.View
   initialize: () ->
     this.model.on('change', this.render, this)
   events: {
-    "click div .edit a": "clickEdit"
-    "click div .ddt a" : "clickDdt"
+    "click div a.edit": "clickEdit"
+    "click div a.ddt" : "clickDdt"
   }
   clickEdit: () ->
     project = new Project().find(this.model.id)

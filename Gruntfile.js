@@ -4,7 +4,7 @@ module.exports = function(grunt){
     coffee: {
       compile: {
         files: {
-          'public/js/timecard-backbone.js': [
+          'lib/timecard-backbone.js': [
             'app/models/*.coffee', 
             'app/controllers/*.coffee', 
             'app/views/*.coffee', 
@@ -12,6 +12,17 @@ module.exports = function(grunt){
           ],
         }
       },
+    },
+    concat: {
+      dist: {
+        files: {
+          "public/js/timecard-backbone.js": [
+            "lib/underscore.js",
+            "lib/jquery.js",
+            "lib/*"
+          ]
+        }
+      }
     },
     cssmin: {
       combine: {
@@ -29,8 +40,9 @@ module.exports = function(grunt){
       }
     }
   });
+  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.registerTask('default', ['coffee', 'cssmin']); 
+  grunt.registerTask('default', ['coffee', 'concat', 'cssmin']); 
 }
