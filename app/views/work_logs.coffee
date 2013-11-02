@@ -13,17 +13,37 @@ class @WorkLogView extends Backbone.View
     startWorking(this.model.get('issue_id'))
   stopWorking: () ->
     stopWorking()
-  template: _.template(
-    $("#work_log-template").html()
-  )
   render: () ->
     work_log = this.model.toJSON()
-    data = {
-      work_log : work_log
-      issue    : new Issue().find(work_log.issue_id).toJSON()
-    }
-    template = this.template(data)
-    this.$el.html(template)
+    issue    = new Issue().find(work_log.issue_id).toJSON()
+
+    this.$el.append(
+      $td = $tag("td", {class: "word_break"}).html(
+        wbr(issue.title, 9)
+      )
+    )
+
+    this.$el.append(
+      $td = $tag("td").html(
+        dispDate(work_log)
+      )
+    )
+
+    this.$el.append(
+      $tag("td").html(
+        $tag("span", {class: "time"}).html(
+          dispTime(work_log)
+        )
+      )
+    )
+
+    this.$el.append(
+      $tag("td").html(
+        $tag("div", {class: "work_log_#{work_log.id} issue_#{issue.id}", style:"padding:10px;"}).html(
+          $tag("a", {href: "#", class: "card btn btn-primary", "data-issue-id": issue.id}).html("S")
+        )
+      )
+    )
     return this
 
 class @WorkLogsView extends Backbone.View

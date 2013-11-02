@@ -28,12 +28,16 @@ class @ProjectView extends Backbone.View
     for issue in this.model.issues().models
       issue.set_ddt() unless issue.is_ddt()
     $("#project_#{this.model.get('id')}").fadeOut(300)
-  template: _.template(
-    $('#project-template').html()
-  )
   render : () ->
-    template = this.template(this.model.toJSON())
-    this.$el.html(template)
+    $project = $tag("div")
+    $project.html($tag("h1").html(this.model.toJSON().name))
+    $project.append($tag("div", {class: "issues"}))
+    $project.append($tag("div", {class: "input-append"}))
+    $buttons = $tag("div", {class: "btn-group"})
+    $buttons.append($tag("a", {class: "btn btn-warning ddt", href: "#"}).html("DDT"))
+    $buttons.append($tag("a", {class: "btn btn-default edit", href: "#"}).html("Edit"))
+    $project.append($buttons)
+    this.$el.html($project)
     return this
 
 class @ProjectsView extends Backbone.View

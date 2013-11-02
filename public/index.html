@@ -4,64 +4,6 @@
 <meta charset="UTF-8" />
 <title>Timecard by BackboneJS</title>
 <link href="/css/timecard-backbone.css"rel="stylesheet" type="text/css" />
-<script type="text/template" id="search-template">
-<form>
-<input type="text" class="input" style="margin-top: 10px;" />
-<input type="submit" value="search" class="submit btn btn-default" />
-</form>
-<div class="results"></div>
-</script>
-<script type="text/template" id="project-template">
-<div class="span12">
-<h1><%- name %></h1>
-<div class="issues"></div>
-<div class="input-append"> 
-<div class="btn-group"> 
-<a href="#" class="btn btn-warning ddt">DDT</a>
-<a href="#" class="btn btn-default edit">Edit</a>
-</div>
-</div>
-</div>
-</script>
-<script type="text/template" id="add_issue-template">
-<input type="text" class="input" />
-<input type="submit" value="add issue" class="btn" />
-</script>
-<script type="text/template" id="issue-template">
-<h2>
-<label>
-<%= title_with_url() %>
-</label>
-<span class="time"></span>
-</h2>
-<div class="btn-toolbar">
-<div class="btn-group issue_<%- id %>">
-<a class="card btn btn-primary" href="#">S</a>
-<a class="ddt btn btn-warning" href="#">D</a>
-<a class="cls btn btn-danger" href="#">C</a>
-<a class="edit btn btn-default" href="#">E</a>
-</div>
-</div>
-<div class="body">${issue.body}</div>
-</script>
-<script type="text/template" id="work_log-template">
-<td class="word_break">
-<%= wbr(issue.title, 9) %>
-</td>
-<td>
-<%= dispDate(work_log)  %>
-</td>
-<td>
-<span class="time">
-<%= dispTime(work_log)  %>
-</span>
-</td>
-<td>
-<div class="work_log_<%= work_log.id %> issue_<%= issue.id %>" style="padding:10px;">
-<a href="#" class="card btn btn-primary" data-issue-id="<%= issue.id %>">S</a>
-</div>
-</td>
-</script>
 <script src="/js/timecard-backbone.js"></script>
 <script>
 /*
@@ -70,10 +12,8 @@ window.AJAX_URL = "http://timecard-rails.dev"
 window.token = $('meta[name="csrf-token"]').attr('content')
 */
 </script>
-
 </head>
 <body>
-
 <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -107,7 +47,7 @@ window.token = $('meta[name="csrf-token"]').attr('content')
           <li><button class="btn do_export" type="button">export to file</button>
           </li>
           <li>
-            <input id="import_file" type="file" name="file" value="" style="display:none;" />
+            <input id="import_file" type="file" name="file" value="" />
             <button class="btn do_import" type="button">import from file</button>
           </li>
           <!--

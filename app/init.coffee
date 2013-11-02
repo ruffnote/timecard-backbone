@@ -23,7 +23,6 @@ init = () ->
   $issue_cards.removeClass("btn-primary")
   $issue_cards.addClass("btn-warning")
 
-
 prepareShowProjects = () ->
   $(".show_projects").click(() ->
     $(".project").fadeIn(100)
@@ -347,6 +346,13 @@ addFigure = (str) ->
   while num != num.replace(/^(-?\d+)(\d{3})/, "$1,$2")
     num = num.replace(/^(-?\d+)(\d{3})/, "$1,$2")
   return num
+
+@$tag = (el, attrs=false) ->
+  attr = ""
+  if attrs
+    for i of attrs
+      attr += " #{i}=\"#{attrs[i]}\""
+  return $("<#{el}#{attr}></#{el}>")
 
 $(() ->
   init()

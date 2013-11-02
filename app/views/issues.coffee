@@ -3,9 +3,6 @@ class @IssueView extends Backbone.View
     this.model.on('change', this.updateIssue, this)
   tagName : 'div'
   className : "issue col-lg-3"
-  template: _.template(
-    $('#issue-template').html()
-  )
   events:{
     "click h2"            : "doOpenStart"
     "click div div .card" : "doStart"
@@ -76,12 +73,25 @@ class @IssueView extends Backbone.View
     issue.save()
 
   render  : () ->
-    template = this.template(
-      this.model
-    )
-    this.$el.html(template)
+    issue = this.model.toJSON()
+    $title = $tag("h2").html(this.model.title_with_url())
+    $time = $tag("span", {class: "time"})
+    $title.append($time)
+    this.$el.append($title)
+
+    $group = $tag("div", {class: "btn-group issue_#{issue.id}"})
+    $group.append($tag("a", {class: "card btn btn-primary", href: "#"}).html("S"))
+    $group.append($tag("a", {class: "ddt btn btn-warning", href: "#"}).html("D"))
+    $group.append($tag("a", {class: "cls btn btn-danger", href: "#"}).html("C"))
+    $group.append($tag("a", {class: "edit btn btn-default", href: "#"}).html("E"))
+    $tools = $tag("div", {class: "btn-toolbar"})
+    $tools.html($group)
+    this.$el.append($tools)
+
+    this.$el.append($tag("div", {class: "body"}).html(issue.body))
+
     if this.model.is_active()
-      $("#project_#{this.model.get("project_id")}").show()
+      $("#project_#{issue.project_id}").show()
     else
       this.$el.hide()
       this.$el.css("background", "#ccc")
@@ -138,8 +148,7 @@ class @AddIssueView extends Backbone.View
     issue.save()
     this.collection.add(issue)
     $title.val("")
-  template: _.template($('#add_issue-template').html()),
   render: () ->
-    template = this.template()
-    this.$el.html(template)
+    this.$el.append($tag("input", {type: "text", class: "input"}))
+    this.$el.append($tag("input", {type: "submit", value: "add issue", class: "btn"}))
     return this
