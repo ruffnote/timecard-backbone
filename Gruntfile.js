@@ -19,6 +19,7 @@ module.exports = function(grunt){
           "public/js/timecard-backbone.js": [
             "lib/underscore.js",
             "lib/jquery.js",
+            "db/*",
             "lib/*"
           ]
         }
