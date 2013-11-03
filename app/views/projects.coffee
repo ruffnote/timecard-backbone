@@ -11,7 +11,7 @@ class @ProjectView extends Backbone.View
     this.model.on('change', this.render, this)
   events: {
     "click div a.edit": "clickEdit"
-    "click div a.ddt" : "clickDdt"
+    "click div a.ddt_in_project" : "clickDdt"
   }
   clickEdit: () ->
     project = new Project().find(this.model.id)
@@ -34,7 +34,7 @@ class @ProjectView extends Backbone.View
     $project.append($tag("div", {class: "issues"}))
     $project.append($tag("div", {class: "input-append"}))
     $buttons = $tag("div", {class: "btn-group"})
-    $buttons.append($tag("a", {class: "btn btn-warning ddt", href: "#"}).html("DDT"))
+    $buttons.append($tag("a", {class: "btn btn-warning ddt_in_project", href: "#"}).html("DDT"))
     $buttons.append($tag("a", {class: "btn btn-default edit", href: "#"}).html("Edit"))
     $project.append($buttons)
     this.$el.html($project)
