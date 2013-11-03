@@ -4,4 +4,4 @@ node_modules
 npm-debug.log
 public
 public/js/timecard-backbone.js
-lib/timecard-backbone.js 
+lib/timecard-backbone.js

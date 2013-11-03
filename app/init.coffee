@@ -7,14 +7,12 @@ init = () ->
   prepareDoImport()
   prepareDoDownload()
   prepareDoUpload()
-
   @left_work_logs = new WorkLog().condition({
     order : {started_at: "desc"}
     limit : 20
   })
 
   new AppController().render()
-  #renderCalendars()
   $(".calendar").hide()
   loopRenderWorkLogs()
   #loopFetch()
@@ -190,31 +188,6 @@ innerLink = () ->
     return text + "<wbr>" + char
   )
 
-renderCalendars = () ->
-  now = new Date()
-  year = now.getYear() + 1900
-  mon = now.getMonth() + 1
-  renderCalendar("this_month", now)
-  now = new Date(year, mon, 1)
-  renderCalendar("next_month", now)
-
-renderCalendar = (key, now) ->
-  year = now.getYear() + 1900
-  mon = now.getMonth() + 1
-  day = now.getDate()
-  wday = now.getDay()
-  start = wday - day%7 -1
-  w = 1
-  $(".#{key} h2").html("#{year}-#{zp(mon)}")
-  for i in [1..31]
-    d = (i + start)%7 + 1
-    $day = $(".#{key} table .w#{w} .d#{d}")
-    $day.html(i).addClass("day#{i}")
-    $day.css("background", "#fc0") if i == day && key == "this_month"
-    $day.addClass("md_#{mon}_#{i}")
-    w += 1 if d == 7
-  renderWorkLogs()
-
 renderWorkingLog = () ->
   last = new WorkLog().last()
   if last
@@ -333,10 +306,6 @@ forUploadWorkLog = (work_log) ->
   work_log.local_id = work_log.id
   delete work_log.id
   return work_log
-
-debug = (title, data=null) ->
-  console.log title
-  console.log data if data
 
 window.db = db
 
